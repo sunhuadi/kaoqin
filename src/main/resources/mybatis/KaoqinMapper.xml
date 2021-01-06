@@ -7,6 +7,6 @@
     <select id="qurryKaoqin" resultType="Kaoqin" parameterType="String">
         select kaoqin.*
         from kaoqin,student
-        where  student.stuNo=#{stuNo}
+        where  student.stuNo=#{stuNo} and kaoqin.stuNo=student.stuNo
     </select>
 </mapper>
