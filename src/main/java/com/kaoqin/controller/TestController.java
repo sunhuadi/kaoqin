@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -27,16 +28,13 @@ public class TestController {
     }
     @Autowired
     TeacherMapper teacherMapper;
-
-    @GetMapping("/testT")
     @ResponseBody
-    public List<Teacher> ttt(){
-        return teacherMapper.qurryTea();
-    }
     @GetMapping("/")
-    public String index()
+    public String index(HttpServletRequest request) throws Exception
     {
-        return "index";
+        Object loginUser = request.getSession().getAttribute("id");
+        System.out.println(loginUser);
+        return "ok";
     }
 
 

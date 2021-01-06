@@ -4,13 +4,12 @@ Vue.use(VueRouter)
 
 const routes = [
 	{
-		path: '/login',
+		path: '/',
 		component: manage => import('../views/login.vue'),
 	},
 	{
-		path: '/',
+		path: '/index',
 		component: manage => import('../layout/manage.vue'),
-		redirect: '/checkingIn',
 		children: [{
 				path: "/checkingIn",
 				name: "考勤签到",

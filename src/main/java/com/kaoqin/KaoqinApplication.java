@@ -10,5 +10,4 @@ public class KaoqinApplication {
     public static void main(String[] args) {
         SpringApplication.run(KaoqinApplication.class, args);
     }
-
 }

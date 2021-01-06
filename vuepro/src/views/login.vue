@@ -1,53 +1,36 @@
 <template>
   <div>
-	  <div id="logo"></div>
+    <div id="logo"></div>
     <el-card class="login-form-layout">
       <el-form autocomplete="on" :model="loginForm" ref="loginForm" label-position="left">
         <div style="text-align: center">
           <svg-icon icon-class="login-mall" style="width: 56px;height: 56px;color: #409EFF"></svg-icon>
         </div>
-		
-        <h2 class="login-title color-main">学科竞赛管理系统</h2>
-		
+
+        <h2 class="login-title color-main">考勤管理系统</h2>
+
         <el-form-item prop="username">
-          <el-input
-            name="username"
-            type="text"
-            v-model="loginForm.username"
-            autocomplete="on"
-            placeholder="请输入用户名"
-          >
-            <span slot="prefix">
-              <svg-icon icon-class="user" class="color-main"></svg-icon>
-            </span>
+          <el-input name="username" type="text" v-model="loginForm.username" autocomplete="on" placeholder="请输入用户名">
+						<span slot="prefix">
+							<svg-icon icon-class="user" class="color-main"></svg-icon>
+						</span>
           </el-input>
         </el-form-item>
-		
+
         <el-form-item prop="password">
-          <el-input
-            name="password"
-            :type="pwdType"
-            @keyup.enter.native="handleLogin"
-            v-model="loginForm.password"
-            autocomplete="on"
-            placeholder="请输入密码"
-          >
-            <span slot="prefix">
-              <svg-icon icon-class="password" class="color-main"></svg-icon>
-            </span>
+          <el-input name="password" :type="pwdType" @keyup.enter.native="handleLogin" v-model="loginForm.password"
+                    autocomplete="on" placeholder="请输入密码">
+						<span slot="prefix">
+							<svg-icon icon-class="password" class="color-main"></svg-icon>
+						</span>
             <span slot="suffix" @click="showPwd">
-              <svg-icon icon-class="eye" class="color-main"></svg-icon>
-            </span>
+							<svg-icon icon-class="eye" class="color-main"></svg-icon>
+						</span>
           </el-input>
         </el-form-item>
-		
+
         <el-form-item style="margin-bottom: 60px">
-          <el-button
-            style="width: 100%"
-            type="primary"
-            :loading="loading"
-            @click.native.prevent="handleLogin"
-          >登录</el-button>
+          <el-button style="width: 100%" type="primary" :loading="loading" @click.native.prevent="handleLogin">登录</el-button>
         </el-form-item>
       </el-form>
     </el-card>
@@ -56,6 +39,7 @@
 
 
 <script>
+import http from '../utils/http.js'
 export default {
   name: "login",
   data() {
@@ -67,7 +51,7 @@ export default {
       loading: false,
       pwdType: "password",
     };
-	name:"logo"
+    name: "logo"
   },
   methods: {
     showPwd() {
@@ -78,11 +62,21 @@ export default {
       }
     },
     handleLogin() {
+      const that = this
       this.$refs.loginForm.validate(valid => {
         if (valid) {
-          console.log(this.loginForm)
+          http.post('/logins',that.loginForm)
+              .then(rep => {
+                console.log(rep)
+                this.$router.push({
+                  path: '/index',
+                })
+              })
+              .catch(e => {
+                console.log(e)
+              })
+          console.log(that.loginForm)
         } else {
-          // eslint-disable-next-line no-console
           console.log("参数验证不合法！");
           return false;
         }
@@ -91,7 +85,7 @@ export default {
   }
 };
 </script>
- 
+
 <style scoped>
 .login-form-layout {
   position: absolute;
@@ -101,11 +95,11 @@ export default {
   margin: 140px auto;
   border-top: 10px solid #409eff;
 }
- 
+
 .login-title {
   text-align: center;
 }
- 
+
 .login-center-layout {
   background: #409eff;
   width: auto;
@@ -114,12 +108,12 @@ export default {
   max-height: 100%;
   margin-top: 200px;
 }
-#logo{
-    background: url("../assets/logo.png");
-    background-size: 100% 100%;
-    height: 100%;
-    position: fixed;
-    width: 100%
-}
 
+#logo {
+  background: url("../assets/logo.png");
+  background-size: 100% 100%;
+  height: 100%;
+  position: fixed;
+  width: 100%
+}
 </style>

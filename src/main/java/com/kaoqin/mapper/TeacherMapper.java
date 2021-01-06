@@ -10,5 +10,6 @@ import java.util.List;
 @Repository
 public interface TeacherMapper {
 
-    List<Teacher> qurryTea();
+    //List<Teacher> qurryTea();
+    Teacher qurryTeacherByUsername(String username);
 }
