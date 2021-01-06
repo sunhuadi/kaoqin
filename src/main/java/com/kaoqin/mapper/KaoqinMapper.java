@@ -10,4 +10,5 @@ import java.util.List;
 @Repository
 public interface KaoqinMapper {
     List<Kaoqin> qurryKaoqin(String stuNo);
+    List<Kaoqin> qurryCheck(int cid);
 }

@@ -23,4 +23,9 @@ public class KaoqinController {
     public List<Kaoqin> check(){
         return kaoqinMapper.qurryKaoqin("170201");
     }
+    @GetMapping("/quire")
+    @ResponseBody
+    public List<Kaoqin> check1(){
+        return kaoqinMapper.qurryCheck(1);
+    }
 }
