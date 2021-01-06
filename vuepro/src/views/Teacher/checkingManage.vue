@@ -5,12 +5,12 @@
     style="width: 80% ;margin-top: 20px;margin: 0 auto"
 	>
    <el-table-column
-     prop="id"
+     prop="cid"
      label="课程序号"
      width="80">
    </el-table-column>
    <el-table-column
-     prop="title"
+     prop="courseName"
      label="课程名称"
      width="180">
    </el-table-column>
@@ -48,12 +48,13 @@
 </template>
 
 <script>
+  import http from '../../utils/http.js'
   export default {
     data() {
       return {
         tableData: [{
-          id:"5",
-		  title:"离散数学",
+          cid:"5",
+          courseName:"离散数学",
 		  room:"南教202",
 		  teacher:"老师",
 		  stuClass:"计算1703",
@@ -61,7 +62,7 @@
 		  stage:"已考勤"
         },
 		{
-		  id:"6",
+		  cid:"6",
 		  title:"离散数学",
 		  room:"南教202",
 		  teacher:"老师",
@@ -74,6 +75,16 @@
     },
 	methods:{
 		
-	}
+	},
+    created() {
+      const _this = this
+      http.get('test1')
+        .then(rep => {
+          _this.tableData = rep.data
+        })
+        .catch(e => {
+          console.log(e)
+        })
+    }
   }
 </script>
