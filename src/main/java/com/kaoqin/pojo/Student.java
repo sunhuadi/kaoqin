@@ -10,7 +10,5 @@ public class Student {
     String stuClass;
     String sex;
     String password;
-    String lateTimes;
-    String leaveTimes;
-    String missTimes;
+    String stage;
 }
